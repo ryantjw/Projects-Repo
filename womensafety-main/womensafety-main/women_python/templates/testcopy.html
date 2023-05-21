@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body class = "active" style="background-color:#EFEFEF;">
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+            <h3>Women's Safety in Melbourne</h3>
+            <p>A website designed to assist women in navigating safely</p>
+            </div>
+            <!--menu item-->
+            <ul>
+                <li>
+                    <a href="#" class="active">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('map')}}">
+                        <span class="icon"><i class="fas fa-desktop"></i></span>
+                        <span class="item">Map</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Pages/emergency.html">
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <span class="item">Emergency</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('rating')}}">
+                        <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="item">Rating</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Pages/about.html">
+                        <span class="icon"><i class="fas fa-database"></i></span>
+                        <span class="item">About Us</span>
+                    </a>
+                </li>
+                <li>
+            </ul>
+
+        </div>
+        <div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                    <img src="https://plan4womenssafety.dss.gov.au/wp-content/uploads/2019/11/image-research.png" class="attachment-medium size-medium wp-post-image" alt="" srcset="https://plan4womenssafety.dss.gov.au/wp-content/uploads/2019/11/image-research.png 181w, https://plan4womenssafety.dss.gov.au/wp-content/uploads/2019/11/image-research-150x150.png 150w" sizes="(max-width: 40px) 100vw, 40px">
+                    
+                    Women's Safety Title
+
+                </div>
+            </div>
+            {% block content %}
+            <div class= "crime_safety_block">
+                Crime and safety in your area<br>
+                Explore the statistics available for different types of crime in Melbourne using the interactive map.<br>
+                Click on the map below.
+                <button type="button" onclick="{{url_for('map')}}">Go to Maps</button>
+            </div>
+            <div div class = graphs> 
+
+            </div>
+
+            
+
+            <div class= "highest_criminal_activity"> 
+                Areas with highest criminal activity
+                <img src="women_python/assets/Persons who experienced physical assault, Relationship to perpetrator, By sex, 2020-21.jpeg" alt="Persons who experienced physical assault, Relationship to perpetrator, By sex,">
+
+                
+            </div>
+            <div class= "important_links"> 
+                Some important links:
+                <ul>
+                <li><a href="https://www.aihw.gov.au/reports/domestic-violence/family-domestic-and-sexual-violence"> > Family, domestic and sexual violence (AIHW)
+                </a></li>
+                <li><a href= "https://inform.regionalaustralia.org.au/population-and-people/crime-and-justice/item/australian-crime-statistics"> > AUSTRALIAN CRIME STATISTICS</a><br></li>
+                <li><a href="https://www.abs.gov.au/statistics/people/crime-and-justice/crime-victimisation-australia/latest-release"> > ABS statistics</a></li>
+            </ul>
+            </div>
+            {% endblock %}
+        </div>
+
+    </div>
+  <script src = "{{url_for('static', filename='scripts/women_safety.js')}}"></script>
+</body>
+<div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-danger">{{ message }}</div>
+{% endfor %}
+    
+</div>
+</html>

@@ -1,0 +1,53 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+{% extends 'rating.html' %}
+<!-- Everywhere that extends need change -->
+
+{% block content %}
+
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0"> -->
+        <li class="nav-item">
+                <a class="nav-link" href="{{url_for('addComment',post_id=post['id'])}}">New Comment</a>
+        </li>
+    </nav>
+    
+
+
+    <div class="card">
+        <div class="card-header">
+            <b>Forum Post # {{post['id']}} </b>
+            <!-- {{post['title']}} # {{post['id']}}  -->
+        </div>
+        <div class="card-body">
+        <h3 class="card-title">{{ post['title'] }}</h3>
+        <h6 class = "subpost">{{post['suburb']}} | Safety Rating: {{post['rating']}}</h6>
+        <p class="card-text">{{ post['content'] }}</p>
+        </div>
+    </div>
+
+    <div class = "card" id = "cardforpost">
+        <div class ="card-header bg-info" >
+            <b>Comment Section</b>
+        </div>
+        {% for i in comments|reverse %}
+        <div class = "cardcontent">
+            <div class = "card border-primary">
+                <div class = "comment-text">{{i['comment']}} </div>
+                
+                <div class="dropdown">
+                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" id = "testbutton"></button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ url_for('editComment',post_id = post['id'] ,commentid=i['commentid']) }}">Edit</a>
+                            <form action="{{ url_for('deleteComment', post_id=post['id'],commentid = i['commentid']) }}" method="POST">
+                                <input class = "dropdown-item" type="submit" value="Delete Comment"
+                                        onclick="return confirm('Are you sure you want to delete this comment?')">
+                            </form> 
+                        </div>
+                </div> 
+                
+        </div>
+    </div>
+    {%endfor%}
+
+{% endblock %}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+ 
+
+    </style>
+</head>
+
+<body class = "active" style="background-color:#EFEFEF;">
+    
+    
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+            <h3>Women's Safety in Melbourne</h3>
+            <p>A website designed to assist women in navigating safely</p>
+            </div>
+            <!--menu item-->
+            <ul>
+                <li>
+                    <a href="{{url_for('index')}}">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('map')}}">
+                        <span class="icon"><i class="fas fa-desktop"></i></span>
+                        <span class="item">Map</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{{url_for('rating')}}">
+                        <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="item">Rating</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('about')}}" class = "active">
+                        <span class="icon"><i class="fas fa-database"></i></span>
+                        <span class="item">About Us</span>
+                    </a>
+                </li>
+                <li>
+            </ul>
+        </div>
+        <div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                    <img src="https://plan4womenssafety.dss.gov.au/wp-content/uploads/2019/11/image-research.png" class="attachment-medium size-medium wp-post-image" alt="" srcset="https://plan4womenssafety.dss.gov.au/wp-content/uploads/2019/11/image-research.png 181w, https://plan4womenssafety.dss.gov.au/wp-content/uploads/2019/11/image-research-150x150.png 150w" sizes="(max-width: 40px) 100vw, 40px">
+                    
+                    Women's Safety Title
+
+                </div>
+            </div>
+            <div class="about_heading"> 
+                About us 
+            </div>
+            <div class="about_body">
+                <li>‣A website created by Group 17 for women safety.<br></li>
+                <li>‣The aim of the project is to make public spaces safer for women by providing them with relevant information to travel safely.<br></li>
+                <li>‣Group 17’s goal is to enhance the safety of women and decrease the issues women face by providing a service with various methods and features that can help inform and alert women.<br></li>
+                <li>‣Team members of the group 17 are - Jack, Ryan and Shikha.</li>
+
+            </div>
+            
+            <script src = "{{url_for('static', filename='scripts/map.js')}}"></script>
+
+  
+
+        
+        </html>

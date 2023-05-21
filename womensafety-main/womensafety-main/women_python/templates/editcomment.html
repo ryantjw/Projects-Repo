@@ -1,0 +1,25 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+{% extends 'rating.html' %}
+
+
+{% block content %}
+<div class="card">
+    <form method="post">
+        <div class ="mb-3 ms-3 me-3">
+            <div class="form-group">
+                <label for="comment">Edit Comment</label>
+                <textarea name="comment" placeholder="Add Comment"
+                        class="form-control">{{ request.form['comment'] or comment['comment']}}</textarea>
+            </div>
+        </div>
+
+        <div class ="mb-3 ms-3 me-3">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+{% endblock %}

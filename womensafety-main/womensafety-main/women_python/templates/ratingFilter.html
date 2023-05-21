@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Bootstrap CSS -->
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style2.css') }}">
+    <title>Document</title>
+</head>
+<body class = "active">
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+            <h3>Women's Safety in Melbourne</h3>
+            <p>A website designed to assist women in navigating safely</p>
+            </div>
+            <!--menu item-->
+            <ul>
+                <li>
+                    <a href = "{{url_for('index')}}" >
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('map')}}">
+                        <span class="icon"><i class="fas fa-desktop"></i></span>
+                        <span class="item">Map</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('rating')}}" class="active">
+                        <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="item">Rating</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('about')}}">
+                        <span class="icon"><i class="fas fa-database"></i></span>
+                        <span class="item">About Us</span>
+                    </a>
+                </li>
+                <li>
+            </ul>
+
+        </div>
+        <div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#"> <i class="fas fa-bars"></i></a>
+                    Safety Rating Page
+                </div>
+            </div>
+            <mid>
+                
+                <nav class="navbar navbar-expand-md navbar-light bg-light">
+                    <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0"> -->
+                    <li class="nav-item">
+                            <a class="nav-link" href="{{url_for('create')}}">New Post</a>
+                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('create_filter')}}">Filter Post</a>
+                    </li>
+        
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('rating')}}">Clear Filter</a>
+                    </li>
+        
+                </nav>
+                
+                {% for post in avg_rating %}
+                <div class="card text-center">
+                    <div class="card-header">
+                      Average Rating of "{{post['suburb']}}"
+                    </div>
+                    <div class="card-body">
+                      <h4 class="card-title">{{post['AVG']}}/5</h4>
+                      <p class="card-text">({{posts|length}} Reviews)</p>
+                    </div>
+                  </div>
+                  {% endfor %}
+        
+                 {% block content %}
+                <!-- For loop here with list indexing can splice and show only first 10 responses -->
+                <div class = "card">
+                    <table class="table table-striped">
+                        <thead class = "table-primary">            
+                            <tr>
+                                <th>Post Title</th>
+                                <th>Date Posted</th>
+                                <th>Suburb</th>
+                                <th>Rating</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+        
+                        <tbody>               
+                            {% for post in posts|reverse %}
+                            <tr>
+                                <td><a href="{{ url_for('post', post_id=post['id']) }}">{{ post['title'] }}</a></td>
+                                <td>{{ post['created'][:-3]}}</td>
+                                <td>{{post['suburb']}}</td>
+                                <td>{{post['rating']}}</td>
+                                <td>
+                                    <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{{ url_for('edit', id=post['id']) }}"
+                                        > Edit</a>
+                                        <form action="{{ url_for('delete', id=post['id']) }}" method="POST">
+                                        <input class = "dropdown-item" type="submit" value="Delete Post"
+                                                onclick="return confirm('Are you sure you want to delete this post?')">
+                                        </form> 
+                                    </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            
+                        </tbody> 
+                        
+                    </table>
+                </div>
+            {% endblock %}
+            </mid>
+        </div>
+
+    </div>
+
+
+
+
+
+    <!-- Add A Script Tag for Posts and set it a variable and JSON it  -->
+    <script src = "{{url_for('static', filename='scripts/women_safety.js')}}"></script>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script> 
+</body>
+</html>

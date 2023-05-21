@@ -1,0 +1,59 @@
+{% extends 'rating.html' %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+    <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0"> -->
+    <li class="nav-item">
+            <a class="nav-link" href="{{url_for('create')}}">New Post</a>
+        </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{url_for('create_filter')}}">Filter Post</a>
+    </li>
+
+</nav>
+
+<div class = "card">
+    <table class="table table-striped">
+        <thead class = "table-primary">            
+            <tr>
+                <th>Post Title</th>
+                <th>Date Posted</th>
+                <th>Suburb</th>
+                <th>Rating</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>               
+            {% for post in posts|reverse %}
+            <tr>
+                <td><a href="{{ url_for('post', post_id=post['id']) }}">{{ post['title'] }}</a></td>
+                <td>{{ post['created'][:-3]}}</td>
+                <td>{{post['suburb']}}</td>
+                <td>{{post['rating']}}</td>
+                <td>
+                    <div class="dropdown">
+                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ url_for('edit', id=post['id']) }}"
+                        > Edit</a>
+                        <form action="{{ url_for('delete', id=post['id']) }}" method="POST">
+                        <input class = "dropdown-item" type="submit" value="Delete Post"
+                                onclick="return confirm('Are you sure you want to delete this post?')">
+                        </form> 
+                    </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            
+        </tbody> 
+        
+    </table>
+    <a href ="{{url_for('rating')}}" id="showless" ><i class="fa fa-angle-double-up fa-lg"></i></a>
+    <!-- Format it to the middle -->
+    <!-- Change link to HTML with for loop that shows all -->
+</div>
+{% endblock %}

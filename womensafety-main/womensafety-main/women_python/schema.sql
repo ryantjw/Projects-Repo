@@ -1,0 +1,18 @@
+DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS comments;
+
+CREATE TABLE posts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    title TEXT NOT NULL,
+    suburb TEXT NOT NULL,
+    rating INTEGER NOT NULL,
+    content TEXT NOT NULL
+);
+
+CREATE TABLE comments(
+    commentid INTEGER PRIMARY KEY AUTOINCREMENT,
+    postid INTEGER NOT NULL,
+    comment TEXT NOT NULL,
+    FOREIGN KEY (postid) REFERENCES posts (id)
+);

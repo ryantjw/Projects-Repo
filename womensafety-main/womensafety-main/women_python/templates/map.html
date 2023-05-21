@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8' />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/build/ol.js"></script> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href = "../styles/womensafety.css">
+    <link rel ="stylesheet" href = "{{ url_for('static',filename='css/map.css') }}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Layers Map</title>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <!-- <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js'></script> -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+    <!-- <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css' rel='stylesheet' /> -->
+    <meta name='viewport' content='width=device-width, initial-scale=1'/>
+    <style>
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    
+    </style>
+</head>
+
+<body class = "active">
+    
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css">
+
+      
+    <div id='map' style='width: 100%; height: 100%; margin-top: 70px;' ></div>
+
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoianRvYzAwMDEiLCJhIjoiY2w3Nnd6eml1MjV2NTNvbXF0bW5teXR4OCJ9.QLLJdMT_yoYd_pe1hL0mWQ';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/jtoc0001/cl8lp53dp000m14o0v3yc9p2x'
+    });
+    
+    map.addControl(
+    new MapboxDirections({
+    accessToken: mapboxgl.accessToken
+    }),
+    'top-right'
+    );
+
+    </script>
+
+    <script> 
+    
+    var posts = '{{all_posts|tojson}}';
+    
+    
+   
+
+    posts = posts.replaceAll('[','')
+    posts = posts.replaceAll(']]"','')
+    posts = posts.split("],")
+
+    for(i =0; i< (posts.length); i++){
+        
+        posts[i] = posts[i].replaceAll('\"','')
+        posts[i] = posts[i].replaceAll(']]','')
+        posts[i] = posts[i].trim()
+
+        posts[i] = posts[i].split(',')  
+        posts[i][2] = parseFloat(posts[i][2])    
+        
+        // for (j=0;j<5;j++){
+        //     posts[i][0].pop()
+
+        // }
+        posts[i][0] = posts[i][0].slice(0,posts[i][0].length - 5)
+
+
+    }
+
+    
+  
+    
+   
+    
+    </script>
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+            <h3>Women's Safety in Melbourne</h3>
+            <p>A website designed to assist women in navigating safely</p>
+            </div>
+            <!--menu item-->
+            <ul>
+                <li>
+                    <a href = "{{url_for('index')}}" >
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">Home</span>
+                    </a>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('map')}}" class = "active">
+                        <span class="icon"><i class="fas fa-desktop"></i></span>
+                        <span class="item">Map</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{{url_for('rating')}}" >
+                        <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="item">Rating</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('about')}}">
+                        <span class="icon"><i class="fas fa-database"></i></span>
+                        <span class="item">About Us</span>
+                    </a>
+                </li>
+                <li>
+            </ul>
+
+        </div>
+        <div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+
+                    Women's Safety Title
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+
+    <script src = "{{url_for('static', filename='scripts/map.js')}}"></script>
+
+  
+   
+</body>
+</html>

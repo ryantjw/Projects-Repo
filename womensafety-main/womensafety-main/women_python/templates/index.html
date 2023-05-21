@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+    <style>
+
+a:link {
+  color: #ffff;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: pink;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+    </style>
+</head>
+
+<body class = "active" style="background-color:#EFEFEF;">
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+            <h3>Women's Safety in Melbourne</h3>
+            <p>A website designed to assist women in navigating safely</p>
+            </div>
+            <!--menu item-->
+            <ul>
+                <li>
+                    <a href="#" class="active">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('map')}}">
+                        <span class="icon"><i class="fas fa-desktop"></i></span>
+                        <span class="item">Map</span>
+                    </a>
+                </li>
+         
+                <li>
+                    <a href="{{url_for('rating')}}">
+                        <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="item">Rating</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('about')}}">
+                        <span class="icon"><i class="fas fa-database"></i></span>
+                        <span class="item">About</span>
+                    </a>
+                </li>
+                <li>
+            </ul>
+
+        </div>
+        <div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                    <img src="https://plan4womenssafety.dss.gov.au/wp-content/uploads/2019/11/image-research.png" class="attachment-medium size-medium wp-post-image" alt="" srcset="https://plan4womenssafety.dss.gov.au/wp-content/uploads/2019/11/image-research.png 181w, https://plan4womenssafety.dss.gov.au/wp-content/uploads/2019/11/image-research-150x150.png 150w" sizes="(max-width: 40px) 100vw, 40px">
+                    
+                    Women's Safety in Melbourne
+
+                </div>
+            </div>
+            {% block content %}
+            <!--button to go to map directly-->
+            <div class= "crime_safety_block">
+                ⁍ Crime and safety in your area<br>
+                ⁍ Explore the statistics available for different types of crime in Melbourne using the interactive map.<br>
+                ⁍ Click on the map button.
+                <a href="{{url_for('map')}}" style ="background-color:#fbf6f6;color:black">Go to Map</a>
+                
+                    <!-- <button type="button" onclick="{{url_for('map')}}">Go to Maps</button> -->
+            </div>
+
+
+            <!-- table starts here-->
+            <h1>Crime in Suburb</h1>
+
+            <div class="table1">
+            <input type="text" placeholder="Search ..." class="filter-input">
+            <div class="output"></div>
+            </div>
+
+            <!--chart starts here-->
+            <!--
+            <h1>Persons who experienced physical assault, Relationship to perpetrator, By sex, 2020-21</h1>            </h1>
+            -->
+            <div class ="chartContainer">
+            <div style = "width: 700px">
+                <canvas id="relationshipChart" style="width:75%;max-width:700px"></canvas></div>
+            <div style = "height:20px"></div>
+            <!--chart 2-->
+            <div style = "width: 700px">
+                <canvas id="femassaultage" style="width:75%;max-width:700px"></canvas></div>
+            <div style = "height:20px"></div>
+            <div style = "width: 700px">
+                <canvas id="assaultrate" style="width:75%;max-width:700px"></canvas></div>
+            <div style = "height:20px"></div>
+            </div>
+
+<!--            
+            <div div class = graphs> 
+                <iframe title="group 17 report work" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=df979ad1-f7f4-42b6-80e9-5655530e2e98&autoAuth=true&ctid=ef7a487a-77ca-410a-803d-e426b62a587f" frameborder="0" allowFullScreen="true"></iframe>
+            </div>
+            
+        -->
+            
+<!--
+            <div class= "highest_criminal_activity"> 
+                Areas with highest criminal activity
+                <img src="women_python/assets/Persons who experienced physical assault, Relationship to perpetrator, By sex, 2020-21.jpeg" alt="Persons who experienced physical assault, Relationship to perpetrator, By sex,">
+-->
+
+             <!--important links list with hover over function-->   
+            <!--</div>-->
+            <div class= "important_links"> 
+                Some important links:
+                <ul>
+                <li>⦿<a href="https://www.aihw.gov.au/reports/domestic-violence/family-domestic-and-sexual-violence"> Family, domestic and sexual violence (AIHW)
+                </a></li>
+                <li>⦿<a href= "https://inform.regionalaustralia.org.au/population-and-people/crime-and-justice/item/australian-crime-statistics"> Australian Crime Statistics</a><br></li>
+                <li>⦿<a href="https://www.abs.gov.au/statistics/people/crime-and-justice/crime-victimisation-australia/latest-release"> ABS statistics</a></li>
+                <li>⦿<a href="https://www.ourwatch.org.au/quick-facts/"> Quick facts - Our Watch</a></li>
+            </ul>
+            </div>
+            {% endblock %}
+        </div>
+
+    </div>
+  <script src = "{{url_for('static', filename='scripts/women_safety.js')}}"></script>
+  <script src = "{{url_for('static',filename = 'scripts/table.js')}}"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>    
+  <script>
+    var canvasElement = document.getElementById("relationshipChart")
+    var config = {
+    type: 'bar',
+    data: {
+        labels: ['Stranger', 'Family and intimate partner', 'Other known person'],
+        datasets: [
+        {
+            label: 'Males',
+            data: [43.5, 15, 41.6],
+            backgroundColor: [
+                'rgb(0, 71, 171)',
+                'rgb(0, 71, 171)',
+                'rgb(0, 71, 171)',
+        ],
+            borderColor: [
+                'rgba(255, 26, 104, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+        ],
+        borderWidth: 1
+        },
+        {
+            label: 'Females',
+            data: [26.3, 48.9, 26.0],
+            backgroundColor: [
+                'rgb(100, 149, 237)',
+                'rgb(100, 149, 237)',
+                'rgb(100, 149, 237)',
+        ],
+        borderWidth: 1
+        }]
+    }, 
+    options:{
+        borderColor:'rgb(0,0,0)',
+        scales:{
+            xAxisID: {
+                color: 'rgb(0,0,0)', 
+            },
+            yAxisID: {
+                title:{ text: '%', display:true},
+                color: 'rgb(0,0,0)', 
+            }
+        },
+        plugins:{
+            title:{
+                display: true,
+                text: 'Persons who experienced physical assault, Relationship to perpetrator, By sex'
+            }
+        }
+    }
+    };
+
+    var relationshipChart = new Chart(canvasElement, config)
+
+</script>
+
+<script>
+
+    var canvasElement = document.getElementById("femassaultage")
+    var config = {
+    type: 'bar',
+    data: {
+        labels: ['18 to 29 years', '30 to 44 years', '45 years and over'],
+        datasets: [
+        {
+            label: 'Females',
+            data: [3.3, 0.7, 0.2],
+            backgroundColor: [
+                'rgb(100, 149, 237)',
+                'rgb(100, 149, 237)',
+                'rgb(100, 149, 237)',
+        ],
+        borderWidth: 1
+        }]
+    }, 
+    options:{
+        borderColor:'rgb(0,0,0)',
+        scales:{
+            xAxisID: {
+                color: 'rgb(0,0,0)', 
+            },
+            yAxisID: {
+                title:{ text: '%', display:true},
+                color: 'rgb(0,0,0)', 
+            }
+        },
+        plugins:{
+            title:{
+                display: true,
+                text: 'Female sexual assault victimisation rate, By age group, 2020-21'
+            }
+        }
+    }
+    };
+
+    var femassaultage = new Chart(canvasElement, config)
+
+</script>
+<script>src = 'charts.js'</script>
+
+<script>
+    var canvasElement = document.getElementById("assaultrate")
+        var config = {
+            type:'line',
+            data: {
+            labels: ['2008-09','2009-10','2010-11','2011-12','2012-13','2013-14','2015-16','2016-17','2018-19','2019-20','2020-21'],
+            datasets: [
+            {
+                label: 'Males',
+                data: [4.7, 3.6, 3.6, 4.1, 3.4,3.0,2.9,2.7, 3.1, 3.0, 3.0, 2.6,2.3],
+                backgroundColor: [
+                    'rgb(0, 71, 171)',
+            ],
+            borderWidth: 1
+            },
+            {
+                label: 'Females',
+                data: [3.2, 2.6, 2.6, 2.5, 2.2, 2.4, 2.4, 2.5, 2.1, 2.1, 2.5, 2.3, 2.1],
+                backgroundColor: [
+                    'rgb(100, 149, 237)',
+            ],
+            borderWidth: 1
+            }]
+        }, 
+        options:{
+        borderColor:'rgb(0,0,0)',
+        scales:{
+            xAxisID: {
+                color: 'rgb(0,0,0)', 
+            },
+            yAxisID: {
+                title:{ text: '%', display:true},
+                color: 'rgb(0,0,0)', 
+            }
+        },
+        plugins:{
+        title: {
+        display: true,
+        text: 'Face-to-face threatened assault victimisation rate, By sex, 2008-09 to 2020-21'
+    }
+}
+        
+    }
+
+
+        };
+
+        var assaultrate = new Chart(canvasElement, config)
+
+    </script>
+
+</body>
+<div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-danger">{{ message }}</div>
+{% endfor %}
+    
+</div>
+
+</html>
+
+
+
+
+<!--background img code
+  background-image: url('https://thumbs.dreamstime.com/b/women-s-community-social-concept-communication-people-icons-speech-bubbles-women-s-community-social-concept-communication-174530863.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+
+-->
